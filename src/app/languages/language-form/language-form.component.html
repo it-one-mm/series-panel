@@ -1,0 +1,25 @@
+<nz-spin [nzSpinning]="isSpinning">
+    <form nz-form [formGroup]="form" (ngSubmit)="save(form.value)">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="language">Language</nz-form-label>
+          <nz-form-control nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="LanguageErrorTpl">
+            <input nz-input formControlName="language" type="text" id="language">
+            <ng-template #LanguageErrorTpl let-control>
+              <ng-container *ngIf="control.hasError('required')">
+                Please input your language!
+              </ng-container>
+              <ng-container *ngIf="control.hasError('duplicated')">
+                Language is redundant!
+              </ng-container>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item >
+        <nz-divider></nz-divider>
+        <div class="text-right">
+            <button type="button" nz-button (click)="close()" class="mr-8">Cancel</button>
+            <button nz-button nzType="primary" [disabled]="form.invalid">Save</button>
+        </div>
+        
+    </form>
+</nz-spin>
+    

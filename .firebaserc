@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "series-panel": {
+      "hosting": {
+        "series-panel": [
+          "series-panel"
+        ]
+      }
+    }
+  }
+}

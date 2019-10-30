@@ -1,0 +1,28 @@
+<button nz-button nzType="primary" class="mb-20" (click)="showAddNew()">Add New</button>
+
+<nz-spin [nzSpinning]="isSpinning">
+    <nz-table #playListTable [nzData]="playLists" [nzScroll]="{ x: '400px' }">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Created At</th>
+                <th>Updated At</th>
+                <th nzWidth="150px" nzRight="0px">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of playListTable.data">
+                <td>{{ data?.imageFileName }}</td>
+                <td>{{ data.title }}</td>
+                <td>{{ data.categoryName }}</td>
+                <td>{{ data.createdAt.seconds * 1000 | date: 'dd-MM-yyyy' }}</td>
+                <td>{{ data['updatedAt'] ? (data.updatedAt.seconds * 1000 | date: 'dd-MM-yyyy') : '' }}</td>
+                <td>
+                    <a (click)="showEdit(data)">Edit</a>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</nz-spin>

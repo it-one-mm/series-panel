@@ -1,0 +1,75 @@
+<nz-spin [nzSpinning]="isSpinning">
+    <form nz-form [formGroup]="form" (ngSubmit)="save(form.value)">
+        <nz-form-item>
+            <nz-form-label nzRequired nzFor="title">Title</nz-form-label>
+            <nz-form-control nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="titleErrorTpl">
+                <input nz-input formControlName="title" type="text" id="title">
+                <ng-template #titleErrorTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">
+                      Please input your title!
+                    </ng-container>
+                    <ng-container *ngIf="control.hasError('duplicated')">
+                      The Title is redundant!
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label nzFor="selectedPlayList" nzRequired>Play List</nz-form-label>
+            <nz-form-control nzHasFeedback nzErrorTip="Please select your play list!">
+                <nz-select
+                    nzShowSearch
+                    nzAllowClear
+                    nzPlaceHolder="Select a Play List"
+                    formControlName="selectedPlayList"
+                    id="selectedPlayList"
+                    [nzLoading]="playListLoading"
+                >
+                    <nz-option *ngFor="let option of listOfPlayLists" 
+                        [nzLabel]="option.label" 
+                        [nzValue]="option.value">
+                    </nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label nzFor="selectedLanguage" nzRequired>Language</nz-form-label>
+            <nz-form-control nzHasFeedback nzErrorTip="Please select your language!">
+                <nz-select
+                    nzShowSearch
+                    nzAllowClear
+                    nzPlaceHolder="Select a Language"
+                    formControlName="selectedLanguage"
+                    id="selectedLanguage"
+                    [nzLoading]="languageLoading"
+                >
+                    <nz-option *ngFor="let option of listOfLanguages" 
+                        [nzLabel]="option.label" 
+                        [nzValue]="option.value">
+                    </nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label nzFor="imageFileName">Image File Name</nz-form-label>
+            <nz-form-control nzHasFeedback>
+                <input nz-input formControlName="imageFileName" type="text" id="imageFileName">
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label nzFor="videoFileName">Video File Name</nz-form-label>
+            <nz-form-control nzHasFeedback>
+                <input nz-input formControlName="videoFileName" type="text" id="videoFileName">
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-divider></nz-divider>
+        <div class="text-right">
+            <button type="button" nz-button (click)="close()" class="mr-8">Cancel</button>
+            <button nz-button nzType="primary" [disabled]="form.invalid">Save</button>
+        </div>
+
+    </form>
+</nz-spin>

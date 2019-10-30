@@ -1,0 +1,24 @@
+<button nz-button nzType="primary" class="mb-20" (click)="showAddNew()">Add New</button>
+
+<nz-spin [nzSpinning]="isSpinning">
+  <nz-table #categoryTable [nzData]="categories" [nzScroll]="{ x: '400px' }">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Created At</th>
+          <th>Updated At</th>
+          <th nzWidth="150px" nzRight="0px">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of categoryTable.data">
+          <td>{{ data.name }}</td>
+          <td>{{ data.createdAt.seconds * 1000 | date: 'dd-MM-yyyy' }}</td>
+          <td>{{ data['updatedAt'] ? (data.updatedAt.seconds * 1000 | date: 'dd-MM-yyyy') : '' }}</td>
+          <td>
+            <a (click)="showEdit(data)">Edit</a>
+          </td>
+        </tr>
+      </tbody>
+  </nz-table>
+</nz-spin>

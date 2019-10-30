@@ -1,0 +1,36 @@
+<button nz-button nzType="primary" (click)="showAddNew()" class="mb-20">Add New</button>
+
+<input nz-input #searchInput (keyup)="search(searchInput.value)" placeholder="Search Movie..." class="mb-20">
+
+<nz-spin [nzSpinning]="isSpinning">
+    <nz-table #moviesTable [nzData]="filterMovies" [nzScroll]="{ x: '400px' }">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>PlayList</th>
+                <th>Language</th>
+                <th>Created At</th>
+                <th>Updated At</th>
+                <th nzWidth="150px" nzRight="0px">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of moviesTable.data">
+                <td>{{ data?.imageFileName }}</td>
+                <td>{{ data.title }}</td>
+                <td>{{ data.categoryName }}</td>
+                <td>{{ data.playListTitle }}</td>
+                <td>{{ data.language }}</td>
+                <td>{{ data.createdAt.seconds * 1000 | date: 'dd-MM-yyyy' }}</td>
+                <td>{{ data['updatedAt'] ? (data.updatedAt.seconds * 1000 | date: 'dd-MM-yyyy') : '' }}</td>
+                <td>
+                    <a (click)="showEdit(data)">Edit</a>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <a nz-popconfirm nzTitle="Sure to delete?" (nzOnConfirm)="delete(data.id)">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</nz-spin>
